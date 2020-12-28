@@ -1,0 +1,24 @@
+{
+  "name": "cycinfo",
+  "version": "0.0.1",
+  "description": "cyc metrics",
+  "main": "src/cycinfo.js",
+  "scripts": {
+    "start": "npm start src/cycinfo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:paddyc1/cycinfo"
+  },
+  "keywords": [
+    "elastic token",
+    "CYC",
+    "anyswap"
+  ],
+  "author": "paddyc1",
+  "license": "MIT",
+  "dependencies": {
+    "web3": "^1.2.11"
+  },
+  "devDependencies": {}
+}
