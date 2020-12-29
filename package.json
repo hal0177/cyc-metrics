@@ -4,11 +4,11 @@
   "description": "cyc metrics",
   "main": "src/cycinfo.js",
   "scripts": {
-    "start": "npm start src/cycinfo.js"
+    "start": "node src/cycinfo.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@gitee.com:paddyc1/cycinfo"
+    "url": "git@github.com:paddyc1/cycinfo.git"
   },
   "keywords": [
     "elastic token",
