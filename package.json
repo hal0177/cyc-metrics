@@ -2,9 +2,9 @@
   "name": "cycinfo",
   "version": "0.0.1",
   "description": "cyc metrics",
-  "main": "src/cycinfo.js",
+  "main": "src/replace.js",
   "scripts": {
-    "start": "node src/cycinfo.js"
+    "start": "node src/replace.js"
   },
   "repository": {
     "type": "git",
