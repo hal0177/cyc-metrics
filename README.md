@@ -16,10 +16,10 @@ market_cap: The total supply multiplied by the Yuan price, hard-coded to $0.153.
 mint_count: The no. of minting operations in the previous epoch.  
 timestamp: The UNIX time of the rebase.  
 
-To run this:
-create the database using database.sql
-npm install
-npm start
+To run this:  
+create the database using database.sql  
+npm install  
+npm start  
 
 # expressAPI
 
@@ -27,7 +27,7 @@ export PORT=5000    # default to 5000, but can set like this.
 
 To run, use npm run expressAPI
 
-Methods will be expanded, but for now, it delivers the records for the last 7 days.
+Methods will be expanded, but for now, it delivers the records for the last 7 days.  
 http//:localhost:5000/week
 
 ## License
