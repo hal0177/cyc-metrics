@@ -4,17 +4,17 @@ This app cycles through the bsc blocks and uses CYC events to collect historic d
 
 ## CYC Archive Node
 
-Each row in the database is one rebase (1 hour). The columns are as follows:
-epoch       The rebase number starting from zero and incrementing by one for each rebase.
-block_number         The block number the rebase happens at.
-old_per_share_amount        The old circulating supply factor.
-new_per_share_amount        The new circulating supply factor.
-total_supply        Total supply of CYC after rebase.
-mint_vol       Sum of all mints in the previous epoch.
-date        The date of the rebase ascii.
-market_cap     The total supply multiplied by the Yuan price, hard-coded to $0.153.
-mint_count      The no. of minting operations in the previous epoch.
-timestamp       The UNIX time of the rebase.
+Each row in the database is one rebase (1 hour). The columns are as follows:  
+epoch: The rebase number starting from zero and incrementing by one for each rebase.  
+block_number: The block number the rebase happens at.  
+old_per_share_amount: The old circulating supply factor.  
+new_per_share_amount: The new circulating supply factor.  
+total_supply: Total supply of CYC after rebase.  
+mint_vol: Sum of all mints in the previous epoch.  
+date: The date of the rebase ascii.  
+market_cap: The total supply multiplied by the Yuan price, hard-coded to $0.153.  
+mint_count: The no. of minting operations in the previous epoch.  
+timestamp: The UNIX time of the rebase.  
 
 To run this:
 create the database using database.sql
