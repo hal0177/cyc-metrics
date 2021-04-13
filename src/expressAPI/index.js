@@ -1,13 +1,15 @@
-const express = require('express');
+
+const express = require("express");
+const cyc_db = require("./methods/Methods");
+
 const app = express();
-const cyc_db = require('./db_methods/DbMethods');
 const records = new cyc_db();
 
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 
-app.get('/week', async (req, res) => {
+app.get("/week", async (req, res) => {
   await records.week()
   .then(row => {
     res.send(row);

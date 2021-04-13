@@ -1,5 +1,5 @@
 {
-  "name": "cycinfo",
+  "name": "cyc-metrics",
   "version": "0.0.1",
   "description": "cyc metrics",
   "main": "src/cycle.js",
@@ -19,9 +19,9 @@
   "author": "paddyc1",
   "license": "MIT",
   "dependencies": {
+    "bignumber.js": "^9.0.1",
     "express": "^4.17.1",
     "pg": "^8.5.1",
-    "web3": "^1.2.11"
-  },
-  "devDependencies": {}
+    "web3": "^1.3.5"
+  }
 }
