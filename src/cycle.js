@@ -4,22 +4,25 @@ const BigNumber = require("bignumber.js");
 const Config = require("./config");
 const db = require("./database/query");
 const getLatest = db.getLatest;
-const postEntry = db.post;
+const postEntry = db.postEntry;
 
 const ZERO = BigNumber("0");
+const ONE = BigNumber("1");
+const YUAN = "0.153";
 
 const ZERO_ADDRESS = Config.zeroAddress;
 const BLOCK_EXPLORER = Config.blockExplorer;
 const CYC_ADDRESS = Config.cycAddress;
 const CYC_ABI = Config.cycAbi;
-const START_HEIGHT = BigNumber(Config.startHeight);
+// const START_HEIGHT = BigNumber(Config.startHeight);
+const START_HEIGHT = BigNumber("3206000");
 
 const web3 = new Web3(BLOCK_EXPLORER);
 
 const CYC = new web3.eth.Contract(CYC_ABI, CYC_ADDRESS);
-const yuanPrice = "0.153";
 
 var rebaseFactor, epochTime, isNotCycling, epoch, recentBlock, lastTime, totalSupply, currentBlock, mintVol, mintCount, marketCap;
+var info = {}
 
 // rebase 1:  3206058   event.returnValues.epoch: 1
 
@@ -36,15 +39,14 @@ const getRecentEntry = () => {
     isNotCycling = true; // stops cycleBlocks from being called during cycle
 
     // return values
-    epoch = latest ? incrementBn(latest.epoch) : BigNumber("1"); // read db, get latest epoch, add one so that next rebase has correct epoch no.
-    recentBlock = latest ? latest.blockNumber : START_HEIGHT; // read db, latest read block
-    lastTime = latest ? latest.timestamp : ZERO; // read db, get timestamp of latest read block
-    totalSupply = latest ? latest.totalSupply : ZERO; // read db, set to latest rebase total supply
+    epoch = latest ? incrementBn(latest.epoch) : ONE;
+    recentBlock = latest ? latest.blockNumber : START_HEIGHT;
+    lastTime = latest ? latest.timestamp : ZERO;
+    totalSupply = latest ? latest.totalSupply : ZERO;
     
-    currentBlock; // block to read now
-    mintVol = ZERO; // reset every rebase, counts the average amount minted every rebase period
-    mintCount = ZERO; // reset every rebase, counts average mints every rebase period
-    marketCap = ZERO; // dependent on supply. marketCap = supply * yuanPrice
+    mintVol = ZERO;
+    mintCount = ZERO;
+    marketCap = ZERO;
   })
   .catch(error => console.log(`Error in getLatest: ${error.message}`));
 
@@ -68,16 +70,16 @@ const getRecentEntry = () => {
             && event.event === "Rebase"
           )
           {
-            console.log(block.number, "REBASE");
+            console.log(block.number, ">>>>>>>> REBASE", event.returnValues.epoch, "<<<<<<<<");
             info.epoch = epoch;
 
-            info.blockNumber = block.number;
+            info.blockNumber = BigNumber(block.number);
 
             epochTime = BigNumber(block.timestamp.toFixed()).minus(lastTime);
             info.timestamp = BigNumber(block.timestamp);
 
             lastTime = BigNumber(block.timestamp.toFixed());
-            info.date = new Date(lastTime.multipliedBy("1000").toNumber());
+            info.date = new Date(lastTime.multipliedBy("1000").toNumber()).toISOString();
 
             info.newPerShareAmount = BigNumber(event.returnValues.newPerShareAmount);
             info.oldPerShareAmount = BigNumber(event.returnValues.oldPerShareAmount);
@@ -87,14 +89,14 @@ const getRecentEntry = () => {
             totalSupply = totalSupply.multipliedBy(rebaseFactor);
             info.totalSupply = totalSupply;
 
-            marketCap = totalSupply.multipliedBy(yuanPrice);
+            marketCap = totalSupply.multipliedBy(YUAN);
             info.marketCap = marketCap;
 
             mintVol = mintVol.dividedBy(epochTime).multipliedBy("3600");
             info.mintVolume = mintVol;
             info.mintCount = mintCount;
 
-            postEntry(JSON.stringify(info));
+            postEntry(info);
 
             mintVol = ZERO;
             mintCount = ZERO;
@@ -107,7 +109,7 @@ const getRecentEntry = () => {
             && event.returnValues.from === ZERO_ADDRESS
           )
           {
-            console.log(block.number, "MINT");
+            console.log(block.number, "MINT", web3.utils.fromWei(event.returnValues.amount));
             totalSupply = totalSupply.plus(web3.utils.fromWei(event.returnValues.amount));
             mintVol = mintVol.plus(web3.utils.fromWei(event.returnValues.amount));
             mintCount = mintCount.plus("1");
@@ -133,7 +135,7 @@ const getRecentEntry = () => {
     } else {
       console.log("waiting ...");
     }
-  }, 200);
+  }, 100);
 }
 
 getRecentEntry();
