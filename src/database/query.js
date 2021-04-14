@@ -28,17 +28,20 @@ const postEntry = async info => {
   .catch(error => console.log(`Error in pool.query: ${error.message}`));
 }
 
-const getLatest = () => {
-  pool.query("SELECT epoch, block_number, timestamp, total_supply FROM rebase ORDER BY epoch DESC LIMIT 1")
-  .then(latest => {
+const getLatest = async () => {
+  const latest = await pool.query("SELECT epoch, block_number, timestamp, total_supply FROM rebase ORDER BY epoch DESC LIMIT 1")
+  .catch(err => console.log(`Error in pool.query: ${err.message}`));
+  if(latest.rows.length !== 0) {
+    var detail = latest.rows[0];
     return {
-      epoch: BigNumber(latest.rows[0].epoch),
-      blockNumber: BigNumber(latest.rows[0].block_number),
-      timestamp: BigNumber(latest.rows[0].timestamp),
-      totalSupply: BigNumber(latest.rows[0].total_supply)
+      epoch: BigNumber(detail.epoch),
+      blockNumber: BigNumber(detail.block_number),
+      timestamp: BigNumber(detail.timestamp),
+      totalSupply: BigNumber(detail.total_supply)
     }
-  })
-  .catch(error => console.log(`Error in pool.query: ${error.message}`));
+  } else {
+    return undefined;
+  }
 }
 
 module.exports = {

@@ -1,4 +1,4 @@
-CREATE DATABASE cycinfo;
+CREATE DATABASE cycmetrics;
 
 CREATE TABLE rebase (
   epoch BIGINT PRIMARY KEY,

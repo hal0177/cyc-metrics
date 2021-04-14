@@ -19,6 +19,8 @@ const web3 = new Web3(BLOCK_EXPLORER);
 const CYC = new web3.eth.Contract(CYC_ABI, CYC_ADDRESS);
 const yuanPrice = "0.153";
 
+var rebaseFactor, epochTime, isNotCycling, epoch, recentBlock, lastTime, totalSupply, currentBlock, mintVol, mintCount, marketCap;
+
 // rebase 1:  3206058   event.returnValues.epoch: 1
 
 
@@ -27,27 +29,31 @@ const incrementBn = bn => {
 }
 
 const getRecentEntry = () => {
-  var latest;
+  getLatest()
+  .then(latest => {
+    rebaseFactor; // new per share amount / old per share amount
+    epochTime; // miliseconds since last rebase
+    isNotCycling = true; // stops cycleBlocks from being called during cycle
 
-  var rebaseFactor; // new per share amount / old per share amount
-  var epochTime; // miliseconds since last rebase
-  var isCycling = false;
+    // return values
+    epoch = latest ? incrementBn(latest.epoch) : BigNumber("1"); // read db, get latest epoch, add one so that next rebase has correct epoch no.
+    recentBlock = latest ? latest.blockNumber : START_HEIGHT; // read db, latest read block
+    lastTime = latest ? latest.timestamp : ZERO; // read db, get timestamp of latest read block
+    totalSupply = latest ? latest.totalSupply : ZERO; // read db, set to latest rebase total supply
+    
+    currentBlock; // block to read now
+    mintVol = ZERO; // reset every rebase, counts the average amount minted every rebase period
+    mintCount = ZERO; // reset every rebase, counts average mints every rebase period
+    marketCap = ZERO; // dependent on supply. marketCap = supply * yuanPrice
+  })
+  .catch(error => console.log(`Error in getLatest: ${error.message}`));
 
-  // return values
-  var epoch = latest ? incrementBn(latest.epoch) : ZERO; // read db, get latest epoch, add one so that next rebase has correct epoch no.
-  var recentBlock = latest ? latest.blockNumber : START_HEIGHT; // read db, latest read block
-  var lastTime = latest ? latest.timestamp : ZERO; // read db, get timestamp of latest read block
-  var totalSupply = latest ? latest.totalSupply : ZERO; // read db, set to latest rebase total supply
   
-  var currentBlock; // block to read now
-  var mintVol = ZERO; // reset every rebase, counts the average amount minted every rebase period
-  var mintCount = ZERO; // reset every rebase, counts average mints every rebase period
-  var marketCap = ZERO; // dependent on supply. marketCap = supply * 0.15
 
 
   const cycleBlocks = () => {
     currentBlock = incrementBn(recentBlock).toNumber();
-    console.log(currentBlock);
+    currentBlock % 10 === 0 ? console.log(currentBlock) : "";
     
     CYC.getPastEvents("allEvents", {
       fromBlock: currentBlock,
@@ -62,7 +68,7 @@ const getRecentEntry = () => {
             && event.event === "Rebase"
           )
           {
-            console.log(block.number, "REBASE", event);
+            console.log(block.number, "REBASE");
             info.epoch = epoch;
 
             info.blockNumber = block.number;
@@ -88,7 +94,7 @@ const getRecentEntry = () => {
             info.mintVolume = mintVol;
             info.mintCount = mintCount;
 
-            // postEntry(JSON.stringify(info));
+            postEntry(JSON.stringify(info));
 
             mintVol = ZERO;
             mintCount = ZERO;
@@ -108,7 +114,7 @@ const getRecentEntry = () => {
           }
 
           else {
-            console.log(`${block.number}: Unrelated event (${JSON.stringify(event.event)})`);
+            console.log(block.number, "Unrelated Event: ", event.event);
           }
         })
         .catch(error => console.log(`Error in web3.eth.getBlock: ${error.message}`));
@@ -116,19 +122,17 @@ const getRecentEntry = () => {
     })
     .catch(error => console.log(`Error in CYC.getPastEvents: ${error.message}`));
 
-    isCycling = false;
+    isNotCycling = true;
   }
 
   setInterval(() => {
-    latest = getLatest()
-    .then(() => {
-      if(!isCycling) {
-        isCycling = true;
-        cycleBlocks();
-        recentBlock = incrementBn(recentBlock);
-      }
-    })
-    .catch(error => console.log(`Error in getLatest: ${error.message}`));
+    if(isNotCycling) {
+      isNotCycling = false;
+      cycleBlocks();
+      recentBlock = incrementBn(recentBlock);
+    } else {
+      console.log("waiting ...");
+    }
   }, 200);
 }
 
