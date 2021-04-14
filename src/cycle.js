@@ -14,8 +14,7 @@ const ZERO_ADDRESS = Config.zeroAddress;
 const BLOCK_EXPLORER = Config.blockExplorer;
 const CYC_ADDRESS = Config.cycAddress;
 const CYC_ABI = Config.cycAbi;
-// const START_HEIGHT = BigNumber(Config.startHeight);
-const START_HEIGHT = BigNumber("3206000");
+const START_HEIGHT = BigNumber(Config.startHeight);
 
 const web3 = new Web3(BLOCK_EXPLORER);
 
