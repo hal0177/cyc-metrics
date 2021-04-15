@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
     padding: 0;
-    background: #333;
+    background: rgb(14, 14, 14);
     font-size: 12px;
   }
 

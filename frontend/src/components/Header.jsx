@@ -3,16 +3,17 @@ import styled from "styled-components";
 
 const Banner = styled.div`
   position: fixed;
-  width: 70%;
-  height: 8%;
-  margin: 0 15%;
-  padding-top: 0.5rem;
+  top: 0;
+  width: 60%;
+  height: 10vh;
+  margin: 0 20%;
+  padding-top: 1.2rem;
   border: 0.05rem solid dodgerblue;
   border-top: 0;
   border-bottom-left-radius: 0.3rem;
   border-bottom-right-radius: 0.3rem;
   background-color: #222;
-  box-shadow: 0 0.1rem 0.2rem dodgerblue;
+  box-shadow: 0 0.15rem 0.2rem dodgerblue;
   overflow: hidden;
 `
 
