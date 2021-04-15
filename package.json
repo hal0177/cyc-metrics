@@ -1,15 +1,15 @@
 {
   "name": "cyc-metrics",
   "version": "0.0.1",
-  "description": "cyc metrics",
+  "description": "CYCoin historic data and tools.",
   "main": "src/cycle.js",
   "scripts": {
     "start": "node src/cycle.js",
-    "expressAPI": "node expressAPI/src/index.js"
+    "expressAPI": "node src/API/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:paddyc1/cycinfo.git"
+    "url": "git@github.com:paddyc1/cycmetrics.git"
   },
   "keywords": [
     "elastic token",

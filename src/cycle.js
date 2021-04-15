@@ -54,7 +54,7 @@ const getRecentEntry = () => {
 
   const cycleBlocks = () => {
     currentBlock = incrementBn(recentBlock).toNumber();
-    currentBlock % 10 === 0 ? console.log(currentBlock) : "";
+    currentBlock % 5 === 0 ? console.log(currentBlock) : "";
     
     CYC.getPastEvents("allEvents", {
       fromBlock: currentBlock,
@@ -118,15 +118,21 @@ const getRecentEntry = () => {
             console.log(block.number, "Unrelated Event: ", event.event);
           }
         })
-        .catch(error => console.log(`Error in web3.eth.getBlock: ${error.message}`));
+        .catch(error => {
+          console.log(`Error in web3.eth.getBlock: ${error.message}`);
+          clearInterval(startCycle);
+        });
       });
     })
-    .catch(error => console.log(`Error in CYC.getPastEvents: ${error.message}`));
+    .catch(error => {
+      console.log(`Error in CYC.getPastEvents: ${error.message}`);
+      clearInterval(startCycle);
+    });
 
     isNotCycling = true;
   }
 
-  setInterval(() => {
+  const startCycle = setInterval(() => {
     if(isNotCycling) {
       isNotCycling = false;
       cycleBlocks();
@@ -134,7 +140,7 @@ const getRecentEntry = () => {
     } else {
       console.log("waiting ...");
     }
-  }, 100);
+  }, 200);
 }
 
 getRecentEntry();
