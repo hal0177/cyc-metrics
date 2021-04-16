@@ -1,16 +1,11 @@
 
 import styled from "styled-components";
 
-const Main = styled.div`
-  width: 90%;
-  color: white;
-`
 
 
-export function QuickStats() {
+export default function QuickStats() {
   return (
     <>
-
     </>
   );
 }

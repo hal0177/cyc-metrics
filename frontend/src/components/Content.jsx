@@ -1,25 +1,34 @@
 
 import styled from "styled-components";
-import { QuickStats } from "./QuickStats";
+
+import QuickStats from "./QuickStats";
 
 
-const Block = styled.div`
-  width: 60%;
-  height: 120vh;
-  margin: 12vh 20% 0 20%;
-  padding: 2vh;
-  border: 0.1rem solid dodgerblue;
-  border-bottom: 0;
-  border-top-left-radius: 0.3rem;
-  border-top-right-radius: 0.3rem;
-  background-color: #222;
-  box-shadow: 0 -0.15rem 0.2rem dodgerblue;
+const ContentContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 70vw;
+  margin: 0 15%;
 `
 
-export function Content() {
+const Block = styled.div`
+  width: ${props => props.w}%;
+  height: ${props => props.h}vh;
+  margin-bottom: 2vh;
+  padding: 1vh 0;
+  border: 0.08rem solid dodgerblue;
+  border-radius: 0.3rem;
+  background-color: #222;
+  box-shadow: 0 -0.15rem 0.2rem dodgerblue
+  0 0.15rem 0.2rem dodgerblue;
+`
+
+export default function Content() {
   return (
-    <Block>
-      <QuickStats />
-    </Block>
+    <ContentContainer>
+      <Block w={49.5} h={76}></Block>
+      <Block w={49.5} h={76}></Block>
+    </ContentContainer>
   );
 }

@@ -2,18 +2,16 @@
 import styled from "styled-components";
 
 const Banner = styled.div`
-  position: fixed;
-  top: 0;
-  width: 60%;
+  width: 70vw;
   height: 10vh;
-  margin: 0 20%;
-  padding-top: 1.2rem;
+  margin: 0 15% 2vh;
+  padding-top: 1vh;
   border: 0.05rem solid dodgerblue;
   border-top: 0;
   border-bottom-left-radius: 0.3rem;
   border-bottom-right-radius: 0.3rem;
   background-color: #222;
-  box-shadow: 0 0.15rem 0.2rem dodgerblue;
+  box-shadow: 0 0.2rem 0.2rem dodgerblue;
   overflow: hidden;
 `
 
@@ -30,12 +28,12 @@ const Title = styled.div`
 `
 
 
-export function Header() {
+export default function Header() {
   return (
     <>
       <Banner>
         <Title>
-          CYC Metrics
+          CYCoin
         </Title>
       </Banner>
     </>
