@@ -1,4 +1,4 @@
-# CYCinfo
+# CYCoin Metrics
 
 This app cycles through the Binance Smart Chain blockchain and reads events to collect historic data of the total supply and market cap of CYCoin, and more. There are two programs in cycinfo, (1) Full archive node creation program that stays up to date, (2) An express API to serve data from the database to front end applications.
 
