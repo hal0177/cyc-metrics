@@ -16,7 +16,7 @@ const Block = styled.div`
   width: ${props => props.w}%;
   height: ${props => props.h}vh;
   margin-bottom: 2vh;
-  padding: 1vh 0;
+  padding: 2vh;
   border: 0.08rem solid dodgerblue;
   border-radius: 0.3rem;
   background-color: #222;
@@ -27,8 +27,11 @@ const Block = styled.div`
 export default function Content() {
   return (
     <ContentContainer>
-      <Block w={49.5} h={76}></Block>
-      <Block w={49.5} h={76}></Block>
+      <Block w={100} h={40}>
+        <QuickStats />
+      </Block>
+      <Block w={100} h={50}>
+      </Block>
     </ContentContainer>
   );
 }

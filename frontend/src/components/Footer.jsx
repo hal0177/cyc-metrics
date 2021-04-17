@@ -45,9 +45,11 @@ const Logo = styled.img`
 const Sig = styled.div`
   height: 100%;
   padding: 3vh 2vh;
+  font-family: "Russo One", sans-serif;
   font-size: 1rem;
   color: rgb(252, 252, 252);
   opacity: 0.6;
+  cursor: default;
   &:hover {
     opacity: 1;
   }

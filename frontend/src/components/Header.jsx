@@ -25,6 +25,7 @@ const Title = styled.div`
   font-weight: bold;
   color: rgb(0, 0, 0, 0.8);
   text-shadow: 0.08rem 0.08rem 0.1rem rgb(255, 255, 255, 0.1);
+  cursor: default;
 `
 
 
