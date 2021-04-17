@@ -1,7 +1,10 @@
 
 import styled from "styled-components";
 
-import QuickStats from "./QuickStats";
+import QuickStats from "./tabs/QuickStats";
+import TotalSupply from "./tabs/TotalSupply";
+import MarketCap from "./tabs/MarketCap";
+import PerShareAmount from "./tabs/PerShareAmount";
 
 
 const ContentContainer = styled.div`
@@ -27,11 +30,23 @@ const Block = styled.div`
 export default function Content() {
   return (
     <ContentContainer>
+
       <Block w={100} h={40}>
         <QuickStats />
       </Block>
-      <Block w={100} h={50}>
+
+      <Block w={100}>
+        <TotalSupply />
       </Block>
+
+      <Block w={100}>
+        <MarketCap />
+      </Block>
+
+      <Block w={100}>
+        <PerShareAmount />
+      </Block>
+
     </ContentContainer>
   );
 }

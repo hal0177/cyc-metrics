@@ -10,11 +10,12 @@ const QuickStatsContainer = styled.div`
 `
 
 const Title = styled.div`
-  width: 100%;
-  height: 8%;
-  margin: 1% 2%;
+  width: 96%;
+  height: 5vh;
+  margin: 0 2%;
   font-family: "Russo One", sans-serif;
   font-size: 1.2rem;
+  line-height: 5vh;
   color: rgb(255, 255, 255, 0.7);
   cursor: default;
 `
@@ -46,6 +47,7 @@ const InfoHeading = styled.div`
   cursor: default;
   &:hover {
     opacity: 1;
+    text-shadow: 0.1rem 0.1rem 0.1rem rgb(255, 255, 255, 0.1);
   }
 `
 
@@ -71,17 +73,17 @@ export default function QuickStats() {
       <InfoRow type="panels">
         <InfoPanel>
           <Data>
-            122355
+            -
           </Data>
         </InfoPanel>
         <InfoPanel>
           <Data>
-            876876
+            -
           </Data>
         </InfoPanel>
         <InfoPanel>
           <Data>
-            $0.153
+            $-
           </Data>
         </InfoPanel>
       </InfoRow>
@@ -101,17 +103,17 @@ export default function QuickStats() {
       <InfoRow type="panels">
         <InfoPanel>
           <Data>
-            8792384
+            -
           </Data>
         </InfoPanel>
         <InfoPanel>
           <Data>
-            {new Date().toISOString().slice(0, 10)}
+            --/--/--
           </Data>
         </InfoPanel>
         <InfoPanel>
           <Data>
-            3195366
+            -
           </Data>
         </InfoPanel>
       </InfoRow>

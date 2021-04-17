@@ -23,13 +23,14 @@ const FooterContainer = styled.div`
 const Socials = styled.div`
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   width: 20%;
   padding: 2vh 1vh;
 `
 
 const A = styled.a`
   display: inline-block;
-  height: 100%;
+  height: 1.8rem;
 `
 
 const Logo = styled.img`
@@ -37,14 +38,16 @@ const Logo = styled.img`
   height: 1.8rem;
   opacity: 0.6;
   cursor: pointer;
+  border-radius: 2rem;
   &:hover {
     opacity: 1;
+    box-shadow: 0.08rem 0.08rem 1rem rgb(255, 255, 255, 0.2);
   }
 `
 
 const Sig = styled.div`
   height: 100%;
-  padding: 3vh 2vh;
+  padding: 4vh 2vh;
   font-family: "Russo One", sans-serif;
   font-size: 1rem;
   color: rgb(252, 252, 252);
@@ -52,6 +55,7 @@ const Sig = styled.div`
   cursor: default;
   &:hover {
     opacity: 1;
+    text-shadow: 0.1rem 0.1rem 0.1rem rgb(255, 255, 255, 0.1);
   }
 `
 

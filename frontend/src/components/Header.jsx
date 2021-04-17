@@ -1,7 +1,7 @@
 
 import styled from "styled-components";
 
-const Banner = styled.div`
+const HeaderContainer = styled.div`
   width: 70vw;
   height: 10vh;
   margin: 0 15% 2vh;
@@ -31,12 +31,10 @@ const Title = styled.div`
 
 export default function Header() {
   return (
-    <>
-      <Banner>
-        <Title>
-          CYCoin
-        </Title>
-      </Banner>
-    </>
+    <HeaderContainer>
+      <Title>
+        CYCoin
+      </Title>
+    </HeaderContainer>
   );
 }
