@@ -84,7 +84,7 @@ export default function MarketCap() {
         <TimespanContainer>
           <Timespans>
             <TimespanSelect selected={timespan === 0} onClick={() => setTimespan(0)}>
-              Day
+              1-Day
             </TimespanSelect>
             <TimespanSelect selected={timespan === 1} onClick={() => setTimespan(1)}>
               3-Day
@@ -101,6 +101,9 @@ export default function MarketCap() {
           </Timespans>
         </TimespanContainer>
       </Nav>
+
+      <Main>
+      </Main>
 
     </MarketCapContainer>
   );
