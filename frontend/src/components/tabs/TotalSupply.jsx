@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import styled from "styled-components";
+import TSChart from "../charts/TSChart";
 
 const TotalSupplyContainer = styled.div`
   display: flex;
@@ -65,7 +66,8 @@ const TimespanSelect = styled.li`
 
 const Main = styled.div`
   width: 100%;
-  height: 40vh;
+  height: 72vh;
+  padding: 2vh;
 `
 
 
@@ -103,6 +105,7 @@ export default function TotalSupply() {
       </Nav>
 
       <Main>
+        <TSChart />
       </Main>
 
     </TotalSupplyContainer>

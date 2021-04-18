@@ -66,6 +66,7 @@ const TimespanSelect = styled.li`
 const Main = styled.div`
   width: 100%;
   height: 40vh;
+  padding: 1vh;
 `
 
 

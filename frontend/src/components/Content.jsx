@@ -39,13 +39,13 @@ export default function Content() {
         <TotalSupply />
       </Block>
 
-      <Block w={100}>
+      {/* <Block w={100}>
         <MarketCap />
-      </Block>
+      </Block> */}
 
-      <Block w={100}>
+      {/* <Block w={100}>
         <PerShareAmount />
-      </Block>
+      </Block> */}
 
     </ContentContainer>
   );
