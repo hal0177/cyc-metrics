@@ -8,6 +8,8 @@ const TSChartContainer = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
+  background: rgb(0, 0, 0, 0.8);
+  box-shadow: 0.08rem 0.08rem 0.1rem rgb(255, 255, 255, 0.1);
 `
 
 
